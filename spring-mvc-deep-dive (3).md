@@ -1,54 +1,162 @@
-# Understanding Spring MVC — Architecture, IoC, DI and Request Flow
+# Spring Framework and Spring MVC — Complete Beginner Guide
 
-*A working reference for developers who want to actually understand what happens under the hood, not just memorize annotations.*
+*A beginner-friendly guide to understanding the Spring Framework, Spring MVC architecture, IoC, Dependency Injection, and the complete request flow.*
 
 ---
 
-## Why this document exists
+## What is Spring Framework?
 
-Most tutorials jump straight into `@Controller` and `@RequestMapping` without explaining *why* Spring works the way it does. That's fine until something breaks — a bean doesn't wire up, a page doesn't load, or a request just returns 404 and you don't know why.
+Spring Framework is an open-source Java framework used to build enterprise applications. It reduces boilerplate code by providing features such as Dependency Injection (DI), Inversion of Control (IoC), web development, database integration, security, and transaction management.
 
-This paper explains Spring MVC simply, in plain words, with pictures where they help:
+### Why Spring?
 
-- **IoC** — who creates your objects
-- **DI** — how they get connected to each other
-- **Request Flow** — what happens between a browser click and the page you see
+Developing enterprise applications using only Java requires a lot of configuration, object creation, database connectivity, transaction management, and dependency handling. Spring simplifies these tasks using IoC, Dependency Injection, MVC, Security, Data Access, and Auto Configuration, allowing developers to focus on business logic.
 
-### The basic idea in one picture
 
-```mermaid
-graph LR
-    U((User / Browser)) -->|1. sends request| C[Controller]
-    C -->|2. asks for data| M[Model / Service]
-    C -->|3. picks a| V[View]
-    V -->|4. sends back page| U
+## Main Components of Spring Framework
+
+- Core Container
+- Spring MVC
+- Spring Data
+- Spring Security
+- Spring Boot
+- Spring AOP
+- Spring Test
+
+
+
+## Common Spring Annotations
+
+| Annotation | Purpose |
+|------------|---------|
+| `@Component` | Creates a generic Spring Bean. |
+| `@Controller` | Handles HTTP requests and returns a View. |
+| `@RestController` | Returns JSON/XML for REST APIs. |
+| `@Service` | Contains business logic. |
+| `@Repository` | Handles database operations. |
+| `@Autowired` | Injects dependencies automatically. |
+| `@Bean` | Creates a bean from a method. |
+| `@Configuration` | Configuration class for Spring Beans. |
+| `@RequestMapping` | Maps URLs to controller methods. |
+| `@GetMapping` | Handles GET requests. |
+| `@PostMapping` | Handles POST requests. |
+| `@PutMapping` | Handles PUT requests. |
+| `@DeleteMapping` | Handles DELETE requests. |
+| `@PathVariable` | Reads values from the URL path. |
+| `@RequestParam` | Reads query parameters. |
+| `@RequestBody` | Converts JSON into a Java object. |
+| `@ResponseBody` | Converts a Java object into JSON. |
+
+### How Spring Transfers Data
+
+```text
+Browser
+   │
+HTTP Request
+   │
+Controller
+   │
+Service
+   │
+Repository
+   │
+Database
+   │
+Repository
+   │
+Service
+   │
+Controller
+   │
+View / JSON
+   │
+Browser
 ```
 
-That's really all MVC is: **Model** holds data, **View** shows it, **Controller** connects the two. Everything below just explains how Spring builds and manages this for you automatically.
+**Flow**
+
+1. Browser sends an HTTP request.
+2. `DispatcherServlet` receives the request.
+3. `HandlerMapping` finds the correct controller.
+4. The Controller calls the Service.
+5. The Service performs business logic and calls the Repository.
+6. The Repository fetches data from the database.
+7. Data returns to the Service and then the Controller.
+8. The Controller returns a View or JSON response to the client.
+
+### How Important Annotations Work
+
+- **`@Autowired`** – Spring searches the IoC Container and injects the required bean automatically.
+- **`@RequestBody`** – Converts incoming JSON into a Java object.
+- **`@ResponseBody`** – Converts a Java object into JSON using Jackson.
+- **`@PathVariable`** – Reads values directly from the URL path.
+- **`@RequestParam`** – Reads values from query parameters.
+- **`@ModelAttribute`** – Binds HTML form data to a Java object.
+
+### Spring MVC Architecture (Overview)
+
+```mermaid
+graph TD
+Browser --> DispatcherServlet
+DispatcherServlet --> HandlerMapping
+HandlerMapping --> Controller
+Controller --> Service
+Service --> Repository
+Repository --> Database
+Controller --> ViewResolver
+ViewResolver --> View
+View --> Browser
+```
+
+Each component has a simple responsibility:
+
+- **DispatcherServlet** – Receives every HTTP request.
+- **HandlerMapping** – Finds the correct controller.
+- **Controller** – Handles the request and calls the service.
+- **Service** – Contains business logic.
+- **Repository** – Interacts with the database.
+- **ViewResolver** – Maps logical view names to actual pages.
+- **View** – Generates the final HTML response.
+
+## Spring MVC Request Flow
+
+```mermaid
+sequenceDiagram
+Browser->>DispatcherServlet: Request
+DispatcherServlet->>HandlerMapping: Find Controller
+HandlerMapping-->>DispatcherServlet: Controller
+DispatcherServlet->>Controller: Invoke
+Controller->>Service: Business Logic
+Service->>Repository: Fetch Data
+Repository-->>Service: Data
+Service-->>Controller: Result
+Controller-->>DispatcherServlet: Model/View or JSON
+DispatcherServlet->>ViewResolver: Resolve View
+ViewResolver-->>DispatcherServlet: View
+DispatcherServlet-->>Browser: Response
+```
 
 ---
 
 ## Table of Contents
 
-1. [The Core Idea Behind Spring: Inversion of Control](#1-the-core-idea-behind-spring-inversion-of-control)
-2. [Dependency Injection — the mechanism that implements IoC](#2-dependency-injection--the-mechanism-that-implements-ioc)
-3. [The Spring Container](#3-the-spring-container)
-4. [What Spring MVC Actually Is](#4-what-spring-mvc-actually-is)
-5. [The Request Flow — Step by Step](#5-the-request-flow--step-by-step)
-6. [DispatcherServlet in Detail](#6-dispatcherservlet-in-detail)
-7. [Controllers](#7-controllers)
-8. [Model, ModelAndView, and Views](#8-model-modelandview-and-views)
-9. [View Resolvers](#9-view-resolvers)
-10. [Configuration Styles](#10-configuration-styles)
-11. [Interceptors vs Filters](#11-interceptors-vs-filters)
-12. [Exception Handling](#12-exception-handling)
-13. [A Complete Working Example](#13-a-complete-working-example)
-14. [Common Mistakes I See Often](#14-common-mistakes-i-see-often)
-15. [Closing Notes](#15-closing-notes)
-16. [References](#references)
+1. What is Spring Framework?
+2. Spring Framework Components
+3. Spring MVC Architecture
+4. Spring MVC Request Flow
+5. Inversion of Control (IoC)
+6. Dependency Injection (DI)
+7. Spring Container
+8. Controllers
+9. Model and View
+10. View Resolver
+11. Interceptors
+12. Exception Handling
+13. Working Example
+14. Common Mistakes
+15. References
 
 ---
-
 ## 1. The Core Idea Behind Spring: Inversion of Control
 
 Before touching Spring MVC, it helps to understand one simple idea: **Inversion of Control (IoC)**.
@@ -278,22 +386,7 @@ Think of `DispatcherServlet` as the **front desk of a hotel**. It doesn't cook y
 
 It's registered against a URL pattern, commonly `/`, meaning it intercepts every request coming into the application. In a Spring Boot app, you never register this yourself — Spring Boot auto-configures it for you. In a classic non-Boot Spring MVC app, you'd register it in `web.xml` or through a `WebApplicationInitializer`:
 
-```java
-public class MyWebAppInitializer implements WebApplicationInitializer {
-
-    @Override
-    public void onStartup(ServletContext container) {
-        AnnotationConfigWebApplicationContext context =
-            new AnnotationConfigWebApplicationContext();
-        context.register(WebConfig.class);
-
-        ServletRegistration.Dynamic dispatcher =
-            container.addServlet("dispatcher", new DispatcherServlet(context));
-        dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/");
-    }
-}
-```
+*Spring Boot configures `DispatcherServlet` automatically, so manual registration is usually unnecessary.*
 
 The `DispatcherServlet` internally relies on a handful of collaborator beans (all of which you can customize or replace):
 
@@ -425,54 +518,9 @@ REST APIs skip this step completely, since `@ResponseBody` / `@RestController` b
 
 ---
 
-## 10. Configuration Styles
+## 10. Interceptors
 
-Spring MVC can be configured three ways. You'll mostly see the second and third today, but you'll still run into legacy XML in older codebases.
 
-**XML-based (legacy):**
-
-```xml
-<context:component-scan base-package="com.example.app" />
-<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    <property name="prefix" value="/WEB-INF/views/" />
-    <property name="suffix" value=".jsp" />
-</bean>
-```
-
-**Java-based config (`@Configuration`):**
-
-```java
-@Configuration
-@EnableWebMvc
-@ComponentScan("com.example.app")
-public class WebConfig implements WebMvcConfigurer {
-
-    @Bean
-    public ViewResolver viewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".jsp");
-        return resolver;
-    }
-}
-```
-
-**Spring Boot (auto-configured, what most new projects use):**
-
-```java
-@SpringBootApplication
-public class MyApp {
-    public static void main(String[] args) {
-        SpringApplication.run(MyApp.class, args);
-    }
-}
-```
-
-Spring Boot auto-configures the `DispatcherServlet`, an embedded Tomcat server, sensible default view resolvers, and Jackson for JSON — all based on what's on your classpath. You only override what you need to.
-
----
-
-## 11. Interceptors vs Filters
 
 These two get confused constantly, so it's worth being precise.
 
