@@ -1,8 +1,4 @@
-# Spring Framework and Spring MVC — Complete Beginner Guide
-
-*A beginner-friendly guide to understanding the Spring Framework, Spring MVC architecture, IoC, Dependency Injection, and the complete request flow.*
-
----
+# Spring Framework and Spring MVC 
 
 ## What is Spring Framework?
 
@@ -23,31 +19,6 @@ Developing enterprise applications using only Java requires a lot of configurati
 - Spring AOP
 - Spring Test
 
-
-
-## Common Spring Annotations
-
-| Annotation | Purpose |
-|------------|---------|
-| `@Component` | Creates a generic Spring Bean. |
-| `@Controller` | Handles HTTP requests and returns a View. |
-| `@RestController` | Returns JSON/XML for REST APIs. |
-| `@Service` | Contains business logic. |
-| `@Repository` | Handles database operations. |
-| `@Autowired` | Injects dependencies automatically. |
-| `@Bean` | Creates a bean from a method. |
-| `@Configuration` | Configuration class for Spring Beans. |
-| `@RequestMapping` | Maps URLs to controller methods. |
-| `@GetMapping` | Handles GET requests. |
-| `@PostMapping` | Handles POST requests. |
-| `@PutMapping` | Handles PUT requests. |
-| `@DeleteMapping` | Handles DELETE requests. |
-| `@PathVariable` | Reads values from the URL path. |
-| `@RequestParam` | Reads query parameters. |
-| `@RequestBody` | Converts JSON into a Java object. |
-| `@ResponseBody` | Converts a Java object into JSON. |
-
-### How Spring Transfers Data
 
 ```text
 Browser
@@ -93,6 +64,33 @@ Browser
 - **`@RequestParam`** – Reads values from query parameters.
 - **`@ModelAttribute`** – Binds HTML form data to a Java object.
 
+## Common Spring Annotations
+
+| Annotation | Purpose |
+|------------|---------|
+| `@Component` | Creates a generic Spring Bean. |
+| `@Controller` | Handles HTTP requests and returns a View. |
+| `@RestController` | Returns JSON/XML for REST APIs. |
+| `@Service` | Contains business logic. |
+| `@Repository` | Handles database operations. |
+| `@Autowired` | Injects dependencies automatically. |
+| `@Bean` | Creates a bean from a method. |
+| `@Configuration` | Configuration class for Spring Beans. |
+| `@RequestMapping` | Maps URLs to controller methods. |
+| `@GetMapping` | Handles GET requests. |
+| `@PostMapping` | Handles POST requests. |
+| `@PutMapping` | Handles PUT requests. |
+| `@DeleteMapping` | Handles DELETE requests. |
+| `@PathVariable` | Reads values from the URL path. |
+| `@RequestParam` | Reads query parameters. |
+| `@RequestBody` | Converts JSON into a Java object. |
+| `@ResponseBody` | Converts a Java object into JSON. |
+
+### How Spring Transfers Data
+
+
+
+
 ### Spring MVC Architecture (Overview)
 
 ```mermaid
@@ -135,26 +133,6 @@ DispatcherServlet->>ViewResolver: Resolve View
 ViewResolver-->>DispatcherServlet: View
 DispatcherServlet-->>Browser: Response
 ```
-
----
-
-## Table of Contents
-
-1. What is Spring Framework?
-2. Spring Framework Components
-3. Spring MVC Architecture
-4. Spring MVC Request Flow
-5. Inversion of Control (IoC)
-6. Dependency Injection (DI)
-7. Spring Container
-8. Controllers
-9. Model and View
-10. View Resolver
-11. Interceptors
-12. Exception Handling
-13. Working Example
-14. Common Mistakes
-15. References
 
 ---
 ## 1. The Core Idea Behind Spring: Inversion of Control
@@ -646,17 +624,8 @@ graph LR
 
 ---
 
-## 14. Common Mistakes I See Often
 
-- **Overusing field injection**, then wondering why unit tests need a full Spring context just to test one class.
-- **Putting business logic inside controllers** instead of pushing it down into the service layer — makes controllers hard to test and reuse.
-- **Forgetting `@ResponseBody` when mixing view-based and REST endpoints** in the same controller, and getting confused why Spring tries to resolve a JSON string as a view name.
-- **Not understanding singleton scope** — by default every bean is a single shared instance. If you store per-request state in an instance field of a `@Service`, you'll get very confusing bugs under concurrent load.
-- **Circular dependencies** between two services that both need each other — constructor injection will fail loudly at startup, which is actually a good thing; it forces you to redesign rather than silently limping along.
-
----
-
-## 15. Closing Notes
+## 14. Closing Notes
 
 Spring MVC looks big, but it really just answers two questions:
 
@@ -697,4 +666,3 @@ If you ever get stuck debugging something in Spring MVC, go back to the diagram 
 
 ---
 
-*Feel free to fork this, correct anything inaccurate, or extend it with Spring Security / Spring Data sections — happy to build those out as a follow-up.*
