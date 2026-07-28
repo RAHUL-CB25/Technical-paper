@@ -522,7 +522,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 ---
 
-## 12. Exception Handling
+## 11. Exception Handling
 
 Two common approaches, and you'll usually see the second one in real projects:
 
@@ -562,7 +562,7 @@ public class GlobalExceptionHandler {
 
 ---
 
-## 13. A Complete Working Example
+## 12. A Complete Working Example
 
 Putting the whole flow together — controller, service, repository, all wired through DI:
 
