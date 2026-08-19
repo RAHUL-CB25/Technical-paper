@@ -1,6 +1,5 @@
 # Python Cheat Sheet
 
-Quick reference for the built-in types and tools you use every day.
 
 ## 1. List / Array
 
