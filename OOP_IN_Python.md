@@ -6,7 +6,6 @@
 ---
 
 ## Table of Contents
-
 1. [Introduction](#introduction)
 2. [Class vs Object](#class-vs-object)
 3. [Instance Variables vs Class Variables](#instance-variables-vs-class-variables)
@@ -19,7 +18,6 @@
    - [3. Polymorphism](#3-polymorphism)
    - [4. Abstraction](#4-abstraction)
 5. [Conclusion](#conclusion)
-
 ---
 
 ## Introduction
