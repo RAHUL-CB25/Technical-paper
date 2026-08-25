@@ -25,6 +25,12 @@ PIP is the package manager used in Python. It helps us install, remove, update, 
 ```bash
 python -m venv venv
 ```
+Activate it on Linux:
+
+```bash
+source venv/bin/activate
+```
+
 
 Activate it on Windows:
 
