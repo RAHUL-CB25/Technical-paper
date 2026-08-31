@@ -1,4 +1,4 @@
-# HTML and CSS: Core Concepts
+# HTML and CSS
 
 ## 1. Box Model
 
