@@ -45,4 +45,3 @@ print(numbers.count(20))
 numbers.pop()
 print(numbers)
 ```
-
